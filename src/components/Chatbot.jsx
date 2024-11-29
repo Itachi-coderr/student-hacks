@@ -103,58 +103,59 @@ const Chatbot = () => {
   
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
-      <ChatHistory
-        chats={chats}
-        onChatSelect={loadChatHistory}
-        onNewChat={handleNewChat} // Add the new chat handler
-      />
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+  <ChatHistory
+    chats={chats}
+    onChatSelect={loadChatHistory}
+    onNewChat={handleNewChat}
+    className="w-full md:w-1/4 bg-white bg-opacity-80 md:shadow-lg md:border-r border-gray-200 overflow-y-auto"
+  />
 
-      <div className="flex-grow flex flex-col items-center justify-center p-4">
-        <div className="relative bg-white bg-opacity-80 rounded-lg shadow-xl w-full max-w-md p-6 md:p-8">
-          <h2 className="text-2xl font-bold mb-4 text-center text-purple-700">
-            EduNext AI Tutor
-          </h2>
+  <div className="flex-grow flex flex-col items-center justify-center p-4">
+    <div className="relative bg-white bg-opacity-80 rounded-lg shadow-xl w-full max-w-md p-6 md:p-8">
+      <h2 className="text-2xl font-bold mb-4 text-center text-purple-700">
+        EduNext AI Tutor
+      </h2>
 
-          <div className="flex flex-col space-y-4 overflow-y-auto max-h-80 w-full mb-4">
-            {chatHistory.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`p-3 rounded-lg shadow ${
-                  msg.role === "user"
-                    ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white self-end max-w-[70%]"
-                    : "bg-gray-200 text-gray-800 self-start max-w-[70%]"
-                }`}
-              >
-                <p className="text-sm">{msg.content}</p>
-              </div>
-            ))}
-            {loading && (
-              <div className="p-3 rounded-lg shadow bg-gray-200 text-gray-800 self-start max-w-[70%]">
-                <p className="text-sm">Typing...</p>
-              </div>
-            )}
+      <div className="flex flex-col space-y-4 overflow-y-auto max-h-80 w-full mb-4">
+        {chatHistory.map((msg, idx) => (
+          <div
+            key={idx}
+            className={`p-3 rounded-lg shadow ${
+              msg.role === "user"
+                ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white self-end max-w-[90%] sm:max-w-[70%]"
+                : "bg-gray-200 text-gray-800 self-start max-w-[90%] sm:max-w-[70%]"
+            }`}
+          >
+            <p className="text-sm">{msg.content}</p>
           </div>
-
-          <div className="w-full flex items-center space-x-2">
-            <textarea
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Ask anything about your studies..."
-              className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-              rows="2"
-            />
-            <button
-              onClick={handleSubmit}
-              className="px-4 py-2 text-black bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105"
-              disabled={loading}
-            >
-              {loading ? "Sending..." : "Send"}
-            </button>
+        ))}
+        {loading && (
+          <div className="p-3 rounded-lg shadow bg-gray-200 text-gray-800 self-start max-w-[90%] sm:max-w-[70%]">
+            <p className="text-sm">Typing...</p>
           </div>
-        </div>
+        )}
+      </div>
+
+      <div className="w-full flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+        <textarea
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          placeholder="Ask anything about your studies..."
+          className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+          rows="2"
+        />
+        <button
+          onClick={handleSubmit}
+          className="px-4 py-2 text-black bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105"
+          disabled={loading}
+        >
+          {loading ? "Sending..." : "Send"}
+        </button>
       </div>
     </div>
+  </div>
+</div>
   );
 };
 
